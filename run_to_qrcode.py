@@ -35,6 +35,8 @@ if __name__ == "__main__":
         ret, bgr_frame, depth_frame = rs.get_frame_stream()
         image, indices, boxes, class_ids, confidences = qrcode_detect.detect(bgr_frame, net)
         height, width = image.shape[:2]
+        print(depth_frame.shape[:2])
+        print(image.shape[:2])
         cof = 0
         old_cof = 0
         distance = "NaN"
