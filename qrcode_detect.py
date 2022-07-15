@@ -38,7 +38,7 @@ def loadWeight(weights = "./yolo-config_10000.weights" ,cfg ="./yolo-config.cfg"
         classes = [line.strip() for line in f.readlines()]
     return net, classes
 
-def drawImage(image, indices, boxes, class_ids, confidences, classes):
+def drawImage(image, indices, boxes, class_ids, confidences, classes, depth_frame):
     x = 0
     y = 0
     w = 0
@@ -53,10 +53,12 @@ def drawImage(image, indices, boxes, class_ids, confidences, classes):
 
         draw_prediction(image, class_ids[i],confidences[i], round(x), round(y), round(x + w), round(y + h),classes)
 
-    x_center = x+w/2
-    y_center = y+h/2
-    cv2.putText(image, "x: " + str(x_center), (20,20 ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
-    cv2.putText(image, "y: " + str(y_center), (20,50 ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
+        x_center = x+w/2
+        y_center = y+h/2
+        distance = depth_frame[ int(y_center), int(x_center)]
+        cv2.putText(image, "x: " + str(x_center), (20,y-20), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
+        cv2.putText(image, "y: " + str(y_center), (20,y-40 ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
+        cv2.putText(image, "z: " + str(distance)+" mm", (20,y-60 ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
     #savePredict(pathSave, name, textPre) # Doi thanh con tro ve dia chi cua anh
         
     scale_percent = 100
