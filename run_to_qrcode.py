@@ -29,7 +29,7 @@ if __name__ == "__main__":
     rs = RealsenseCamera()
     net, classes = qrcode_detect.loadWeight(weights = "./yolov4-tiny-custom_best.weights",cfg ="./yolov4-tiny.cfg",class_name = "./obj.names")
     checkRunToQR = True
-    
+
     while checkRunToQR:
         # ret, color_frame = cap.read()
         ret, bgr_frame, depth_frame = rs.get_frame_stream()
@@ -50,14 +50,14 @@ if __name__ == "__main__":
                 w = box[2]
                 h = box[3]
             old_cof = cof
-        image = qrcode_detect.drawImage(image, indices, boxes, class_ids, confidences, classes)
+        image = qrcode_detect.drawImage(image, indices, boxes, class_ids, confidences, classes, depth_frame)
 
         if len(indices) > 0:
             runToQrcode(x+w/2, y+h/2, width/2, height/2)
             distance = depth_frame[ int(y+h/2), int(x+w/2)]
             if int(distance) < 100:
                 checkRunToQR = False        
-        cv2.putText(image, "z: " + str(distance)+" mm", (20,80 ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
+        
         cv2.imshow("image", image)
         if cv2.waitKey(1) & 0xff == ord('q'):
             break
