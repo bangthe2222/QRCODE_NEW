@@ -59,9 +59,9 @@ def drawImage(image, indices, boxes, class_ids, confidences, classes, depth_fram
             distance = "NaN"
         else:
             distance = depth_frame[ int(y_center), int(x_center)]
-        cv2.putText(image, "x: " + str(x_center), (20,int(y-20)), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
-        cv2.putText(image, "y: " + str(y_center), (20,int(y-40) ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
-        cv2.putText(image, "z: " + str(distance)+" mm", (20,int(y-60) ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
+        cv2.putText(image, "x: " + str(x_center), (ỉnt(x+20),int(y-20)), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
+        cv2.putText(image, "y: " + str(y_center), (int(x+20),int(y-40) ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
+        cv2.putText(image, "z: " + str(distance)+" mm", (int(x+20),int(y-60) ), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255,0,0), 1)
     #savePredict(pathSave, name, textPre) # Doi thanh con tro ve dia chi cua anh
         
     scale_percent = 100
