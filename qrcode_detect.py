@@ -38,7 +38,7 @@ def loadWeight(weights = "./yolo-config_10000.weights" ,cfg ="./yolo-config.cfg"
         classes = [line.strip() for line in f.readlines()]
     return net, classes
 
-def drawImage(image, indices, boxes, class_ids, confidences, classes, depth_frame = None):
+def drawImage(image, indices, boxes, class_ids, confidences, classes, depth_frame = []):
     x = 0
     y = 0
     w = 0
@@ -55,7 +55,7 @@ def drawImage(image, indices, boxes, class_ids, confidences, classes, depth_fram
 
         x_center = x+w/2
         y_center = y+h/2
-        if depth_frame == None:
+        if depth_frame == []:
             distance = "NaN"
         else:
             distance = depth_frame[ int(y_center), int(x_center)]
